@@ -1,6 +1,6 @@
 # Api de Proposta de cartão de crédito
 
-**Comece a gerenciar seus cartões de crédito de forma eficiente e escalável com este conjunto de três microserviços modulares e fáceis de usar.**
+**Apis responsáveis por gerenciar o fluxo de solicitação cartões de crédito de forma eficiente e escalável com este conjunto de três microserviços.**
 
 ## ✨ Visão geral
 
@@ -12,10 +12,10 @@
 * **Tecnologias:**
     * Java 17
     * Spring Boot 3.2.3
+    * REST API
     * PostgreSQL
     * MongoDB
     * Kafka
-    * SpringDoc OpenAPI
     * Lombok
     * ModelMapper
     * Java Mail
