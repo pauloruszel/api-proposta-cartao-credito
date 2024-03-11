@@ -44,7 +44,7 @@
 
 ##  Começando
 
-1. **Clone este repositório:** `git clone https://github.com/seu-nome-de-usuario/projeto-microserviços.git`
+1. **Clone este repositório:** `git clone https://github.com/pauloruszel/api-proposta-cartao-credito.git`
 2. **Acesse a pasta do microserviço desejado:** `cd cartoes-ms` (ou `emissor-ms` ou `email-ms`)
 
 ##  Desenho da Arquitetura
