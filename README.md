@@ -5,9 +5,10 @@
 ## ✨ Visão geral
 
 * **Três microserviços:**
-    * `cartoes-ms`: gerencia os cartões de crédito
+    * `cartoes-ms`: gerencia os cartões de crédito, cadastrando os cartões, clientes e propostas,
     * `emissor-ms`: processa propostas, emite cartões e notifica clientes
-    * `email-ms`: envia e-mails
+    * `email-ms`: envia e-mails de proposta aprovada ou reprovada e envia uma confirmação do status para `cartoes-ms`
+      
 * **Tecnologias:**
     * Java 17
     * Spring Boot 3.2.3
@@ -18,6 +19,7 @@
     * Lombok
     * ModelMapper
     * Java Mail
+   
 * **Estrutura modular:** cada microserviço possui seu próprio diretório com classes Java, recursos e configurações
 * **Build manual:**
     ```
@@ -39,17 +41,6 @@
 
     cd ..
     ```
-* **Imagens Docker:** `docker-compose up --build`
-
-##  Documentação
-
-* **Descrição detalhada dos microserviços:**
-    * `cartoes-ms`: https://learn.microsoft.com/es-es/microsoft-identity-manager/reference/get-smartcard-proposed-pin
-    * `emissor-ms`: https://learn.microsoft.com/de-de/credentials/
-    * `email-ms`: https://support.microsoft.com/es-es/office/crear-un-mensaje-de-correo-electr%C3%B3nico-en-outlook-147208af-ca8e-4cdf-b71f-77ba81a54069
-* **Estrutura do projeto:** https://blog.runrun.it/8-documentos-essenciais-para-o-controle-de-projetos/
-* **Contribuições:** https://www.gov.br/inss/pt-br/saiba-mais/seus-direitos-e-deveres/atualizacao-de-tempo-de-contribuicao/documentos-originais-para-comprovacao-de-tempo-de-contribuicao
-* **Licença:** MIT License
 
 ##  Começando
 
