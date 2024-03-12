@@ -72,6 +72,11 @@ Swagger:
 
 `http://localhost:8080/swagger-ui.html`
 
+Email:
+* Use um e-mail temporário para salvar no cliente que deseja enviar:
+
+`https://temp-mail.org/pt`
+
 ##  Desenho da Arquitetura
 
 ![api-cartao-credito-v1 drawio](https://github.com/pauloruszel/api-proposta-cartao-credito/assets/12766450/050ca266-7dbe-4601-84fd-8985e39c1b78)
