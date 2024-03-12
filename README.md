@@ -25,19 +25,16 @@
     ```
     cd cartoes-ms
     mvn clean install -DskipTests
-    docker-compose up --build
 
     cd ..
 
     cd emissor-ms
     mvn clean install -DskipTests
-    docker-compose up --build
 
     cd ..
 
     cd email-ms
     mvn clean install -DskipTests
-    docker-compose up --build
 
     cd ..
     ```
@@ -45,6 +42,7 @@
 ##  Começando
 
 1. **Clone este repositório:** `git clone https://github.com/pauloruszel/api-proposta-cartao-credito.git`
+
 2. **Acesse a pasta do microserviço desejado:** `cd cartoes-ms` (ou `emissor-ms` ou `email-ms`)
 
 ##  Desenho da Arquitetura
