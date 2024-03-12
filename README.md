@@ -1,4 +1,4 @@
-# Api de Proposta de cartão de crédito
+# 🎯 API de Proposta de cartão de crédito
 
 **Apis responsáveis por gerenciar o fluxo de solicitação cartões de crédito de forma eficiente e escalável com este conjunto de três microserviços.**
 
@@ -9,18 +9,18 @@
     * `emissor-ms`: processa propostas, emite cartões e notifica clientes
     * `email-ms`: envia e-mails de proposta aprovada ou reprovada e envia uma confirmação do status para `cartoes-ms`
       
-* **Tecnologias:**
-    * Java 17
-    * Spring Boot 3.2.3
-    * REST API
-    * PostgreSQL
-    * MongoDB
-    * Kafka
-    * Lombok
-    * ModelMapper
-    * Java Mail
-   
-* **Estrutura modular:** cada microserviço possui seu próprio diretório com classes Java, recursos e configurações
+## ✔️ Tecnologias e bibliotecas usadas
+   - `Java 17`
+   - `Spring Boot 3.2.3`
+   - `REST API`
+   - `PostgreSQL`
+   - `MongoDB e Mongo Express`
+   - `Kafka`
+   - `Lombok`
+   - `ModelMapper`
+   - `Java Mail`
+
+  
 * **Build manual:**
     ```
     cd cartoes-ms
@@ -39,11 +39,40 @@
     cd ..
     ```
 
-##  Começando
+## 🚀 Como usar
+## Clone o repositório:
 
-1. **Clone este repositório:** `git clone https://github.com/pauloruszel/api-proposta-cartao-credito.git`
+```bash
+git clone https://github.com/pauloruszel/api-proposta-cartao-credito.git
+```
 
-2. **Acesse a pasta do microserviço desejado:** `cd cartoes-ms` (ou `emissor-ms` ou `email-ms`)
+## 📁 Entre na pasta do projeto:
+
+```bash
+cd api-proposta-cartao-credito
+```
+
+## 🐳 Execute o docker-compose:
+```bash
+docker-compose up --build
+```
+
+## ✨ URL's importantes:
+
+Mongo Express:
+
+`http://localhost:8083/`
+
+* Usuário: admin
+* Senha: pass
+
+PostgresSQL:
+
+URL: `jdbc:postgresql://localhost:9042/cartoes`
+
+Swagger:
+
+`http://localhost:8080/swagger-ui.html`
 
 ##  Desenho da Arquitetura
 
