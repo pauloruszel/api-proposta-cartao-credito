@@ -20,25 +20,6 @@
    - `ModelMapper`
    - `Java Mail`
 
-  
-* **Build manual:**
-    ```
-    cd cartoes-ms
-    mvn clean install -DskipTests
-
-    cd ..
-
-    cd emissor-ms
-    mvn clean install -DskipTests
-
-    cd ..
-
-    cd email-ms
-    mvn clean install -DskipTests
-
-    cd ..
-    ```
-
 ## 🚀 Como usar
 ## Clone o repositório:
 
@@ -51,6 +32,23 @@ git clone https://github.com/pauloruszel/api-proposta-cartao-credito.git
 ```bash
 cd api-proposta-cartao-credito
 ```
+
+  
+## 🛠️ Build manual:
+   ```bash
+    cd cartoes-ms
+    mvn clean install -DskipTests
+
+    cd ..
+
+    cd emissor-ms
+    mvn clean install -DskipTests
+
+    cd ..
+
+    cd email-ms
+    mvn clean install -DskipTests
+   ```
 
 ## 🐳 Execute o docker-compose:
 ```bash
