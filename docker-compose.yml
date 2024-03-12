@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  cartoes-ms:
+    build:
+      context: ./cartoes-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - kafka
+    networks:
+      - banco_network
+
+  emissor-ms:
+    build:
+      context: ./emissor-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mongodb
+      - kafka
+    networks:
+      - banco_network
+
+  email-ms:
+    build:
+      context: ./email-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - kafka
+    networks:
+      - banco_network
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    networks:
+      - banco_network
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    depends_on:
+      - zookeeper
+    networks:
+      - banco_network
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: cartoes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres@123
+    volumes:
+      - ./cartoes-ms/initdb:/docker-entrypoint-initdb.d
+    ports:
+          - "9042:5432"
+    networks:
+      - banco_network
+
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/
+
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - banco_network
+
+  mongo_express:
+    image: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongodb:27017/
+    ports:
+      - "8083:8081"
+    depends_on:
+      - mongodb
+    networks:
+      - banco_network
+
+networks:
+  banco_network:
+
+volumes:
+  mongodb_data:
