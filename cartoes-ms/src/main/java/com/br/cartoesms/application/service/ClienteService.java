@@ -1,4 +1,4 @@
-package com.br.cartoesms.domain.service;
+package com.br.cartoesms.application.service;
 
 import com.br.cartoesms.application.dto.ClienteDTO;
 

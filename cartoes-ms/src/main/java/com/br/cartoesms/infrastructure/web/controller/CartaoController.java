@@ -1,7 +1,7 @@
 package com.br.cartoesms.infrastructure.web.controller;
 
 import com.br.cartoesms.application.dto.CartaoDTO;
-import com.br.cartoesms.domain.service.CartaoService;
+import com.br.cartoesms.application.service.CartaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

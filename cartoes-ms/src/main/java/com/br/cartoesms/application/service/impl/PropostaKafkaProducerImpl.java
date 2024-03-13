@@ -2,7 +2,7 @@ package com.br.cartoesms.application.service.impl;
 
 import com.br.cartoesms.application.dto.PropostaPayloadDTO;
 import com.br.cartoesms.application.mapper.JsonConverter;
-import com.br.cartoesms.infrastructure.messaging.PropostaKafkaProducer;
+import com.br.cartoesms.application.service.PropostaKafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;

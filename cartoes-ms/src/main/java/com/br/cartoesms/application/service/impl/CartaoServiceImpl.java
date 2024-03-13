@@ -1,12 +1,12 @@
 package com.br.cartoesms.application.service.impl;
 
 import com.br.cartoesms.application.dto.CartaoDTO;
+import com.br.cartoesms.application.service.CartaoService;
+import com.br.cartoesms.application.service.ClienteService;
 import com.br.cartoesms.domain.exception.CartaoNotFoundException;
 import com.br.cartoesms.domain.model.Cartao;
 import com.br.cartoesms.domain.model.Cliente;
 import com.br.cartoesms.domain.repository.CartaoRepository;
-import com.br.cartoesms.domain.service.CartaoService;
-import com.br.cartoesms.domain.service.ClienteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

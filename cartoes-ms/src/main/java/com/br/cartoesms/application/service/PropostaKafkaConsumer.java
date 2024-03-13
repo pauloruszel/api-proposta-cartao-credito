@@ -1,4 +1,4 @@
-package com.br.cartoesms.infrastructure.messaging;
+package com.br.cartoesms.application.service;
 
 
 public interface PropostaKafkaConsumer {
