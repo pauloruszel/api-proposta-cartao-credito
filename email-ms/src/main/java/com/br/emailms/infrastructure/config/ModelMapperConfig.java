@@ -1,4 +1,4 @@
-package com.br.emailms.config;
+package com.br.emailms.infrastructure.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

@@ -1,9 +1,9 @@
-package com.br.emailms.domain.service;
+package com.br.emailms.application.service;
 
-import com.br.emailms.application.dto.EmailConclusaoPayloadDTO;
-import com.br.emailms.application.mapper.JsonConverter;
+import com.br.emailms.application.service.EmailNotificadorConclusao;
+import com.br.emailms.application.service.EmailPayloadDeserializer;
+import com.br.emailms.domain.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -12,33 +12,27 @@ import org.springframework.stereotype.Service;
 public class EmailKafkaConsumer {
 
     private final EmailService emailService;
-    private final EmailKafkaProducer emailKafkaProducer;
-    private final JsonConverter jsonConverter;
+    private final EmailPayloadDeserializer payloadDeserializer;
+    private final EmailNotificadorConclusao notificadorConclusao;
 
-    @Autowired
-    public EmailKafkaConsumer(EmailService emailService, EmailKafkaProducer emailKafkaProducer, JsonConverter jsonConverter) {
+    public EmailKafkaConsumer(EmailService emailService, EmailPayloadDeserializer payloadDeserializer, EmailNotificadorConclusao notificadorConclusao) {
         this.emailService = emailService;
-        this.emailKafkaProducer = emailKafkaProducer;
-        this.jsonConverter = jsonConverter;
+        this.payloadDeserializer = payloadDeserializer;
+        this.notificadorConclusao = notificadorConclusao;
     }
 
     @KafkaListener(topics = "enviar_email", groupId = "grupo-emissor-ms")
     public void receberPayloadEmail(final String payloadJson) {
         log.info("Iniciando a recepção do payload de e-mail.");
-        final var record = jsonConverter.fromJson(payloadJson, com.br.compartilhado.EmissaoEmailPayloadDTO.class);
+        final var record = payloadDeserializer.deserialize(payloadJson);
         log.info("Payload de e-mail recebido e deserializado: {}", record);
 
         log.info("Enviando e-mail para: {}", record.getDestinatarioEmail());
         emailService.enviarEmail(record);
         log.info("E-mail enviado com sucesso para: {}", record.getDestinatarioEmail());
 
-        final var email = EmailConclusaoPayloadDTO.builder()
-                .emailCliente(record.getDestinatarioEmail())
-                .statusEnvio("Concluida")
-                .build();
-
         log.info("Notificando conclusão do envio do e-mail.");
-        emailKafkaProducer.notificarEnvioConcluido(email);
+        notificadorConclusao.notificarConclusao(record.getDestinatarioEmail());
         log.info("Notificação de conclusão do envio do e-mail enviada com sucesso.");
     }
 }
