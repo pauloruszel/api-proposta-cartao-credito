@@ -1,4 +1,4 @@
-package com.br.emailms.application.util;
+package com.br.emailms.infrastructure.util;
 
 import org.springframework.stereotype.Component;
 

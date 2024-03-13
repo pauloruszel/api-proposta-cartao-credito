@@ -15,7 +15,7 @@ public class EmailPayloadDeserializerImpl implements EmailPayloadDeserializer {
     }
 
     @Override
-    public com.br.compartilhado.EmissaoEmailPayloadDTO deserialize(String payloadJson) {
+    public com.br.compartilhado.EmissaoEmailPayloadDTO deserialize(final String payloadJson) {
         return jsonConverter.fromJson(payloadJson, com.br.compartilhado.EmissaoEmailPayloadDTO.class);
     }
 }
