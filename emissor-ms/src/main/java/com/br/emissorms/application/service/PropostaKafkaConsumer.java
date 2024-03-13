@@ -1,4 +1,4 @@
-package com.br.emissorms.domain.service;
+package com.br.emissorms.application.service;
 
 import com.br.emissorms.application.dto.PropostaPayloadDTO;
 import com.br.emissorms.application.mapper.JsonConverter;

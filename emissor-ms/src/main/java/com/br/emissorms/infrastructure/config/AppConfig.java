@@ -1,4 +1,4 @@
-package com.br.emissorms.config;
+package com.br.emissorms.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
