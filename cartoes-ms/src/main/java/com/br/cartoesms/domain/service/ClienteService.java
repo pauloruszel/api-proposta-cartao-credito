@@ -11,7 +11,6 @@ public interface ClienteService {
 
     ClienteDTO obtemClientePorId(Long id);
 
-
     ClienteDTO criarCliente(ClienteDTO clienteDTO);
 
     ClienteDTO atualizaCliente(Long id, ClienteDTO clienteDTO);

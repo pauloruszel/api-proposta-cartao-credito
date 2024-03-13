@@ -12,6 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.*;
+
 @RestController
 @RequestMapping("/api/v1/clientes")
 public class ClienteController {
@@ -29,7 +31,7 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> listarTodosClientes() {
         final var clientes = clienteService.listarTodosClientes();
-        return ResponseEntity.ok(clientes);
+        return ok(clientes);
     }
 
     @Operation(summary = "Obtém detalhes de um cliente por ID")
@@ -39,7 +41,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> obterClientePorId(@PathVariable Long id) {
         final var clienteDTO = clienteService.obtemClientePorId(id);
-        return ResponseEntity.ok(clienteDTO);
+        return ok(clienteDTO);
     }
 
     @Operation(summary = "Cria um novo cliente")
@@ -53,7 +55,7 @@ public class ClienteController {
                 .path("/{id}")
                 .buildAndExpand(clienteDTOsalvo.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(clienteDTOsalvo);
+        return created(uri).body(clienteDTOsalvo);
     }
 
     @Operation(summary = "Atualiza um cliente existente")
@@ -63,7 +65,7 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
         final var updatedClienteDTO = clienteService.atualizaCliente(id, clienteDTO);
-        return ResponseEntity.ok(updatedClienteDTO);
+        return ok(updatedClienteDTO);
     }
 
     @Operation(summary = "Deleta um cliente por ID")
@@ -71,6 +73,6 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
         clienteService.deletarCliente(id);
-        return ResponseEntity.noContent().build();
+        return noContent().build();
     }
 }
