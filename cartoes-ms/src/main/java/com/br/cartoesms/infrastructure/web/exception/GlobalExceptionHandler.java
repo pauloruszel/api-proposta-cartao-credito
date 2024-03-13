@@ -1,6 +1,6 @@
-package com.br.cartoesms.application.exception;
+package com.br.cartoesms.infrastructure.web.exception;
 
-import com.br.cartoesms.infrastructure.web.exception.*;
+import com.br.cartoesms.domain.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,4 +1,4 @@
-package com.br.cartoesms.infrastructure.web.exception;
+package com.br.cartoesms.domain.exception;
 
 public class InvalidDataException extends RuntimeException {
 

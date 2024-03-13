@@ -1,4 +1,4 @@
-package com.br.cartoesms.config;
+package com.br.cartoesms.infrastructure.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

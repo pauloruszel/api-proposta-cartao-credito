@@ -1,4 +1,4 @@
-package com.br.cartoesms.domain.enums;
+package com.br.cartoesms.application.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

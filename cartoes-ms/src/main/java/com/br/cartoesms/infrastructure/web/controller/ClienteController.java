@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,7 +18,6 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
-    @Autowired
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
@@ -30,7 +28,7 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> listarTodosClientes() {
-        final var clientes = clienteService.findAll();
+        final var clientes = clienteService.listarTodosClientes();
         return ResponseEntity.ok(clientes);
     }
 
@@ -40,7 +38,7 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> obterClientePorId(@PathVariable Long id) {
-        final var clienteDTO = clienteService.findById(id);
+        final var clienteDTO = clienteService.obtemClientePorId(id);
         return ResponseEntity.ok(clienteDTO);
     }
 
@@ -50,7 +48,7 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @PostMapping
     public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO) {
-        final var clienteDTOsalvo = clienteService.create(clienteDTO);
+        final var clienteDTOsalvo = clienteService.criarCliente(clienteDTO);
         final var uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(clienteDTOsalvo.getId())
@@ -64,7 +62,7 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
-        final var updatedClienteDTO = clienteService.update(id, clienteDTO);
+        final var updatedClienteDTO = clienteService.atualizaCliente(id, clienteDTO);
         return ResponseEntity.ok(updatedClienteDTO);
     }
 
@@ -72,7 +70,7 @@ public class ClienteController {
     @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
-        clienteService.delete(id);
+        clienteService.deletarCliente(id);
         return ResponseEntity.noContent().build();
     }
 }

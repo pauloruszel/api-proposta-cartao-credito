@@ -1,6 +1,6 @@
 package com.br.cartoesms.domain.model;
 
-import com.br.cartoesms.domain.enums.StatusProposta;
+import com.br.cartoesms.application.enums.StatusProposta;
 import jakarta.persistence.*;
 import lombok.Data;
 
