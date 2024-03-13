@@ -1,10 +1,10 @@
-package com.br.emailms.domain.service.impl;
+package com.br.emailms.application.service.impl;
 
 import com.br.compartilhado.EmissaoEmailPayloadDTO;
 import com.br.emailms.domain.exception.EmailErrorException;
 import com.br.emailms.domain.exception.EmailException;
-import com.br.emailms.application.service.EmailMessageBuilder;
-import com.br.emailms.domain.service.EmailService;
+import com.br.emailms.infrastructure.service.EmailMessageBuilder;
+import com.br.emailms.application.service.EmailService;
 import com.br.emailms.application.service.EmailTemplateManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

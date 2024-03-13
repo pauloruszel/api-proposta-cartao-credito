@@ -1,6 +1,6 @@
-package com.br.emailms.application.service.impl;
+package com.br.emailms.infrastructure.service.impl;
 
-import com.br.emailms.application.service.EmailMessageBuilder;
+import com.br.emailms.infrastructure.service.EmailMessageBuilder;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;

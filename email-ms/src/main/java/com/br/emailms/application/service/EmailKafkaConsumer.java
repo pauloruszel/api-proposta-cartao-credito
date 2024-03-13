@@ -1,8 +1,5 @@
 package com.br.emailms.application.service;
 
-import com.br.emailms.application.service.EmailNotificadorConclusao;
-import com.br.emailms.application.service.EmailPayloadDeserializer;
-import com.br.emailms.domain.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
