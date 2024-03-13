@@ -3,8 +3,8 @@ package com.br.cartoesms.application.service.impl;
 import com.br.cartoesms.application.dto.EmailConclusaoPayloadDTO;
 import com.br.cartoesms.application.enums.StatusProposta;
 import com.br.cartoesms.application.mapper.JsonConverter;
-import com.br.cartoesms.application.service.PropostaService;
 import com.br.cartoesms.application.service.PropostaKafkaConsumer;
+import com.br.cartoesms.application.service.PropostaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -26,14 +26,14 @@ public class PropostaKafkaConsumerImpl implements PropostaKafkaConsumer {
 
     @Override
     @KafkaListener(topics = TOPIC_ENVIO_EMAIL_CONCLUIDO, groupId = "grupo-cartoes-ms")
-    public void ouvirConfirmacaoEmailConcluido(String json) {
+    public void ouvirConfirmacaoEmailConcluido(final String json) {
         final var record = jsonConverter.fromJson(json, EmailConclusaoPayloadDTO.class);
         log.info("Inicio da operação de confirmação de envio de e-mail concluído para emailCliente: {}", record.getEmailCliente());
 
         if (record.getEmailCliente() != null) {
             log.info("Iniciando atualização do status do cliente com e-mail: {}", record.getEmailCliente());
             try {
-                propostaService.atualizarStatusPorEmail(record.getEmailCliente(), StatusProposta.fromString("Concluida").getStatus());
+                propostaService.atualizarStatusPorEmail(record.getEmailCliente(), StatusProposta.fromString(record.getStatusEnvio()).getStatus());
                 log.info("Status da proposta com id: {} foi atualizado com sucesso para CONCLUÍDA", record.getEmailCliente());
             } catch (Exception e) {
                 log.error("Falha ao atualizar o status do cliente com e-mail: {}. Detalhes do erro: {}", record.getEmailCliente(), e.getMessage());
