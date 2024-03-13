@@ -1,7 +1,7 @@
 package com.br.cartoesms.infrastructure.web.controller;
 
 import com.br.cartoesms.application.dto.PropostaDTO;
-import com.br.cartoesms.domain.service.PropostaService;
+import com.br.cartoesms.application.service.PropostaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
