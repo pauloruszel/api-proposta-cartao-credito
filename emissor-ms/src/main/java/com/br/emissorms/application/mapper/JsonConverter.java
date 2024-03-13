@@ -1,6 +1,6 @@
 package com.br.emissorms.application.mapper;
 
-import com.br.emissorms.infrastructure.web.exception.JsonConverterException;
+import com.br.emissorms.domain.exception.JsonConverterException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

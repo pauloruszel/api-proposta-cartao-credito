@@ -1,4 +1,4 @@
-package com.br.emissorms.infrastructure.web.exception;
+package com.br.emissorms.domain.exception;
 
 public class JsonConverterException extends RuntimeException {
     public JsonConverterException(String message, Throwable cause) {

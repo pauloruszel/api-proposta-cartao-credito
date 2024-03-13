@@ -1,4 +1,4 @@
-package com.br.emissorms.config;
+package com.br.emissorms.infrastructure.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
