@@ -70,13 +70,14 @@ public class PropostaServiceImpl implements PropostaService {
         }
 
         propostas.forEach(proposta -> {
-            proposta.setStatus(StatusProposta.valueOf(status));
+            proposta.setStatus(StatusProposta.fromString(status));
             propostaRepository.save(proposta);
         });
 
         modelMapper.map(propostas.get(0), PropostaDTO.class);
     }
 
+    @Transactional
     @Override
     public void analisarEEnviarProposta(final PropostaDTO propostaDTO) {
         log.info("Iniciando a análise da proposta com ID: {}", propostaDTO.getId());

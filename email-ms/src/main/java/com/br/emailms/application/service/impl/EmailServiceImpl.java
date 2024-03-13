@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
                 final var caminhoTemplate = emailTemplateManager.getTemplateCaminho(payload.getTipoEmail());
                 final var variaveis = Map.of("nomeDestinatario", payload.getNomeDestinatario());
                 final var conteudo = emailTemplateManager.preencherTemplate(caminhoTemplate, variaveis);
-                final var mimeMessage = messageBuilder.construirEmail(EMAIL_FROM, payload.getNomeDestinatario(), payload.getAssunto(), conteudo, true);
+                final var mimeMessage = messageBuilder.construirEmail(EMAIL_FROM, payload.getDestinatarioEmail(), payload.getAssunto(), conteudo, true);
 
                 log.info("Enviando e-mail para {}", payload.getDestinatarioEmail());
                 mailSender.send(mimeMessage);
