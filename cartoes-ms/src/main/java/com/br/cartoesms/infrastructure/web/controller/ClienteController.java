@@ -6,12 +6,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @RequestMapping("/api/v1/clientes")
@@ -19,7 +20,6 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
-    @Autowired
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
@@ -30,8 +30,8 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> listarTodosClientes() {
-        final var clientes = clienteService.findAll();
-        return ResponseEntity.ok(clientes);
+        final var clientes = clienteService.listarTodosClientes();
+        return ok(clientes);
     }
 
     @Operation(summary = "Obtém detalhes de um cliente por ID")
@@ -40,8 +40,8 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> obterClientePorId(@PathVariable Long id) {
-        final var clienteDTO = clienteService.findById(id);
-        return ResponseEntity.ok(clienteDTO);
+        final var clienteDTO = clienteService.obtemClientePorId(id);
+        return ok(clienteDTO);
     }
 
     @Operation(summary = "Cria um novo cliente")
@@ -50,12 +50,12 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @PostMapping
     public ResponseEntity<ClienteDTO> criarCliente(@RequestBody ClienteDTO clienteDTO) {
-        final var clienteDTOsalvo = clienteService.create(clienteDTO);
+        final var clienteDTOsalvo = clienteService.criarCliente(clienteDTO);
         final var uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(clienteDTOsalvo.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(clienteDTOsalvo);
+        return created(uri).body(clienteDTOsalvo);
     }
 
     @Operation(summary = "Atualiza um cliente existente")
@@ -64,15 +64,15 @@ public class ClienteController {
                     schema = @Schema(implementation = ClienteDTO.class)))
     @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
-        final var updatedClienteDTO = clienteService.update(id, clienteDTO);
-        return ResponseEntity.ok(updatedClienteDTO);
+        final var updatedClienteDTO = clienteService.atualizaCliente(id, clienteDTO);
+        return ok(updatedClienteDTO);
     }
 
     @Operation(summary = "Deleta um cliente por ID")
     @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
-        clienteService.delete(id);
-        return ResponseEntity.noContent().build();
+        clienteService.deletarCliente(id);
+        return noContent().build();
     }
 }

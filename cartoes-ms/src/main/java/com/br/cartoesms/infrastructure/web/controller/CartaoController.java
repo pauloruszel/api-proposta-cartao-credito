@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class CartaoController {
     private final CartaoService cartaoService;
 
-    @Autowired
     public CartaoController(CartaoService cartaoService) {
         this.cartaoService = cartaoService;
     }
@@ -32,7 +30,7 @@ public class CartaoController {
                     schema = @Schema(implementation = Page.class)))
     @GetMapping
     public ResponseEntity<Page<CartaoDTO>> listarTodosCartoes(Pageable pageable) {
-        final var cartoesPage = cartaoService.findAll(pageable);
+        final var cartoesPage = cartaoService.listarTodosCartoesPaginados(pageable);
         return ResponseEntity.ok(cartoesPage);
     }
 
@@ -42,7 +40,7 @@ public class CartaoController {
                     schema = @Schema(implementation = CartaoDTO.class)))
     @GetMapping("/{id}")
     public ResponseEntity<CartaoDTO> obterCartaoPorId(@PathVariable Long id) {
-        final var cartaoDTO = cartaoService.findById(id);
+        final var cartaoDTO = cartaoService.obtemCartaoPorId(id);
         return ResponseEntity.ok(cartaoDTO);
     }
 
@@ -52,7 +50,7 @@ public class CartaoController {
                     schema = @Schema(implementation = CartaoDTO.class)))
     @PostMapping
     public ResponseEntity<CartaoDTO> criarCartao(@RequestBody CartaoDTO cartaoDTO) {
-        final var cartaoDTOsalvo = cartaoService.create(cartaoDTO);
+        final var cartaoDTOsalvo = cartaoService.criarCartao(cartaoDTO);
         final var uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(cartaoDTOsalvo.getId())
@@ -66,7 +64,7 @@ public class CartaoController {
                     schema = @Schema(implementation = CartaoDTO.class)))
     @PutMapping("/{id}")
     public ResponseEntity<CartaoDTO> atualizarCartao(@PathVariable Long id, @RequestBody CartaoDTO cartaoDTO) {
-        final var cartaoDTOatualizado = cartaoService.update(id, cartaoDTO);
+        final var cartaoDTOatualizado = cartaoService.atualizaCartao(id, cartaoDTO);
         return ResponseEntity.ok(cartaoDTOatualizado);
     }
 
@@ -74,7 +72,7 @@ public class CartaoController {
     @ApiResponse(responseCode = "204", description = "Cartão deletado com sucesso")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        cartaoService.delete(id);
+        cartaoService.deletarCartao(id);
         return ResponseEntity.noContent().build();
     }
 }

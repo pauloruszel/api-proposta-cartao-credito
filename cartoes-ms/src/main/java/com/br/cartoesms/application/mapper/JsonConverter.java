@@ -1,6 +1,6 @@
 package com.br.cartoesms.application.mapper;
 
-import com.br.cartoesms.infrastructure.web.exception.JsonConverterException;
+import com.br.cartoesms.domain.exception.JsonConverterException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
