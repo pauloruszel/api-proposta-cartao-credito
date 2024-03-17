@@ -1,7 +1,7 @@
 package com.br.emissorms.application.service;
 
 import com.br.emissorms.application.dto.PropostaPayloadDTO;
-import com.br.emissorms.application.mapper.JsonConverter;
+import com.br.emissorms.application.mapper.GsonConverter;
 import com.br.emissorms.domain.enums.StatusEmissao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +13,20 @@ import org.springframework.stereotype.Service;
 public class EmailServiceImpl implements EmailService {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final JsonConverter jsonConverter;
+    private final GsonConverter gsonConverter;
 
     private static final String TOPIC_ENVIAR_EMAIL = "enviar_email";
 
     @Autowired
-    public EmailServiceImpl(KafkaTemplate<String, Object> kafkaTemplate, JsonConverter jsonConverter) {
+    public EmailServiceImpl(KafkaTemplate<String, Object> kafkaTemplate, GsonConverter jsonConverter) {
         this.kafkaTemplate = kafkaTemplate;
-        this.jsonConverter = jsonConverter;
+        this.gsonConverter = jsonConverter;
     }
 
     @Override
     public void enviarEmail(final com.br.compartilhado.EmissaoEmailPayloadDTO payload) {
         log.info("inicio do envio da informações de e-mail para o tópico {}", TOPIC_ENVIAR_EMAIL);
-        final var jsonMessage = jsonConverter.toJson(payload);
+        final var jsonMessage = gsonConverter.toJson(payload);
         kafkaTemplate.send(TOPIC_ENVIAR_EMAIL, jsonMessage);
         log.info("fim do envio da informações de e-mail para o tópico {} com o Json {}", TOPIC_ENVIAR_EMAIL, jsonMessage);
     }
