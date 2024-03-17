@@ -2,7 +2,7 @@ package com.br.cartoesms.application.service.impl;
 
 import com.br.cartoesms.application.dto.EmailConclusaoPayloadDTO;
 import com.br.cartoesms.application.enums.StatusProposta;
-import com.br.cartoesms.application.mapper.JsonConverter;
+import com.br.cartoesms.application.mapper.GsonConverter;
 import com.br.cartoesms.application.service.PropostaKafkaConsumer;
 import com.br.cartoesms.application.service.PropostaService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropostaKafkaConsumerImpl implements PropostaKafkaConsumer {
     private final PropostaService propostaService;
-    private final JsonConverter jsonConverter;
+    private final GsonConverter gsonConverter;
     private static final String TOPIC_ENVIO_EMAIL_CONCLUIDO = "email_envio_concluido";
 
     @Autowired
-    public PropostaKafkaConsumerImpl(PropostaService propostaService, JsonConverter jsonConverter) {
+    public PropostaKafkaConsumerImpl(PropostaService propostaService, GsonConverter gsonConverter) {
         this.propostaService = propostaService;
-        this.jsonConverter = jsonConverter;
+        this.gsonConverter = gsonConverter;
     }
 
 
     @Override
     @KafkaListener(topics = TOPIC_ENVIO_EMAIL_CONCLUIDO, groupId = "grupo-cartoes-ms")
     public void ouvirConfirmacaoEmailConcluido(final String json) {
-        final var record = jsonConverter.fromJson(json, EmailConclusaoPayloadDTO.class);
+        final var record = gsonConverter.fromJson(json, EmailConclusaoPayloadDTO.class);
         log.info("Inicio da operação de confirmação de envio de e-mail concluído para emailCliente: {}", record.getEmailCliente());
 
         if (record.getEmailCliente() != null) {

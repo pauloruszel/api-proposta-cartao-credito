@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS tb_proposta (
 INSERT INTO tb_cliente (nome, cpf, email, data_nascimento, endereco, renda_mensal)
 VALUES
     ('Ana Silva', '12345678901', 'teros76918@hdrlog.com', '1990-05-15', 'Rua das Flores, 100', 2800),
-    ('Bruno Martins', '23456789012', 'teros76918@hdrlog.com', '1985-08-25', 'Av. Brasil, 250', 6500),
+    ('Ruan Rosa', '23456789012', 'ruanrosa02@gmail.com', '1985-08-25', 'Av. Brasil, 250', 6500),
     ('Carla Dias', '34567890123', 'teros76918@hdrlog.com', '1992-12-30', 'Rua do Sol, 75', 7000);
 
 --- Inserts para tb_cartao
